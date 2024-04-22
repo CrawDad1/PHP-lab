@@ -46,13 +46,17 @@ if (isset($_SESSION['formData'])) {
             <div>
                 <form method="GET" action="results.php">
                     <div class="container card" style="background-color: #303030;color: aliceblue;">
-                        <div class="row mx-1 my-2">
-                            <label class="p-0" for="pName">Product Name (substring)</label>
-                            <input value="<?= $pName ?>" class="text-input" type="text" name="pName" id="pName">
+                        <div class="row my-2">
+                            <div class="col">
+                                <label class="p-0" for="pName">Product Name (substring)</label>
+                                <input value="<?= $pName ?>" class="text-input" type="text" name="pName" id="pName">
+                            </div>
                         </div>
-                        <div class="row mx-1 my-2">
-                            <label class="p-0" for="wCity">Warehouse City (substring)</label>
-                            <input value="<?= $wCity ?>"  class="text-input" type="text" name="wCity" id="wCity">
+                        <div class="row my-2">
+                            <div class="col">
+                                <label class="p-0" for="wCity">Warehouse City (substring)</label>
+                                <input value="<?= $wCity ?>"  class="text-input" type="text" name="wCity" id="wCity">
+                            </div>
                         </div>
                         <div class="row my-2">
                             <div class="col me-2">
