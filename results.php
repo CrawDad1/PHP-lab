@@ -9,9 +9,9 @@ if (isset($_GET)){
 // set up sql connection
 $wsuID = "f689u267";
 $mysqli = new mysqli("localhost", $wsuID, $wsuID, $wsuID);
-$query = 'SELECT * FROM agents;';
+$query = 'SELECT pid as id, pname as name, city, price, quantity FROM products';
+
 $results = $mysqli->query($query);
-// aid, aname, city, percent
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,19 +47,30 @@ $results = $mysqli->query($query);
                     <div class="row my-3">
                         <table class="table">
                             <tr>
-                                <th>aid</th>
-                                <th>aname</th>
-                                <th>city</th>
-                                <th>percent</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>City</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
                             </tr>
                                 <?php
-                                    while ($row = $results->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td>{$row['aid']}</td>";
-                                        echo "<td>{$row['aname']}</td>";
-                                        echo "<td>{$row['city']}</td>";
-                                        echo "<td>{$row['percent']}</td>";
-                                        echo "</tr>";
+                                    if ($results->num_rows < 1){
+                                        // no results
+                                        echo "</table>";
+                                        echo "<p>No results found</p>";
+                                    }
+                                    else {
+                                        while ($row = $results->fetch_assoc()) {
+                                            // pid, pname, city, price, quantity
+                                            echo "<tr>";
+                                            echo "<td>{$row['pid']}</td>";
+                                            echo "<td>{$row['pname']}</td>";
+                                            echo "<td>{$row['city']}</td>";
+                                            echo "<td>{$row['quantity']}</td>";
+                                            echo "<td>{$row['price']}</td>";
+                                            echo "</tr>";
+                                        };
+                                        echo "</table>";
                                     };
                                 ?>
                         </table>
