@@ -9,7 +9,29 @@ if (isset($_GET)){
 // set up sql connection
 $wsuID = "f689u267";
 $mysqli = new mysqli("localhost", $wsuID, $wsuID, $wsuID);
-$query = 'SELECT pid as id, pname as name, city, price, quantity FROM products';
+$query = "SELECT pid, pname, city, price, quantity FROM products " . 
+"WHERE pname LIKE '%" . $_GET['pName'] . "%' " . 
+"AND city LIKE '%" . $_GET['wCity'] . "%' "; 
+
+// make conditions
+if (is_numeric($_GET['minQ'])) {
+    $query = $query . "AND quantity >= {$_GET['minQ']} ";
+}
+
+if (is_numeric($_GET['maxQ'])) {
+    $query = $query . "AND quantity <= {$_GET['maxQ']} ";
+}
+
+if (is_numeric($_GET['minPrice'])) {
+    $query = $query . "AND price >= {$_GET['minPrice']} ";
+}
+
+if (is_numeric($_GET['maxPrice'])) {
+    $query = $query . "AND price <= {$_GET['maxPrice']} ";
+}
+
+$query = $query . ";";
+
 
 $results = $mysqli->query($query);
 ?>
@@ -28,6 +50,9 @@ $results = $mysqli->query($query);
         <div style="width:50%;">
             <h1 class="text-center">PHP PROJECT PAGE</h1>
             <h2 class="text-center">Results Page</h2>
+            <?php
+                echo "<h2 class='text-center'>{$query}</h2>";
+            ?>
             <div>
                 <div class="container card" style="background-color: #303030;color: aliceblue;">
                     <div class="row my-3">
@@ -45,7 +70,7 @@ $results = $mysqli->query($query);
                         ?>
                     </div>
                     <div class="row my-3">
-                        <table class="table">
+                        <table class="table" style="color: white;">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
