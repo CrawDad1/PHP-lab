@@ -7,7 +7,11 @@ if (isset($_GET)){
 }
 
 // set up sql connection
-
+$wsuID = "f689u267";
+$mysqli = new mysqli("localhost", $wsuID, $wsuID, $wsuID);
+$query = 'SELECT * FROM agents;';
+$results = $mysqli->query($query);
+// aid, aname, city, percent
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,19 +30,43 @@ if (isset($_GET)){
             <h2 class="text-center">Results Page</h2>
             <div>
                 <div class="container card" style="background-color: #303030;color: aliceblue;">
-                    <h3>GET contains: </h3>
-                    <?php
-                    if (!empty($_GET)) {
-                        echo "<ul>";
-                        foreach ($_GET as $key => $value) {
-                            echo "<li><strong>$key</strong>: $value</li>";
-                        }
-                        echo "</ul>";
-                        } else {
-                            echo "<p>No query variables found.</p>";
-                        }
-                    ?>
-                    <a href="index.php" type="button" class="btn btn-primary">Seach Again</a>
+                    <div class="row my-3">
+                        <h3>GET contains: </h3>
+                        <?php
+                        if (!empty($_GET)) {
+                            echo "<ul>";
+                            foreach ($_GET as $key => $value) {
+                                echo "<li><strong>$key</strong>: $value</li>";
+                            }
+                            echo "</ul>";
+                            } else {
+                                echo "<p>No query variables found.</p>";
+                            }
+                        ?>
+                    </div>
+                    <div class="row my-3">
+                        <table class="table">
+                            <tr>
+                                <th>aid</th>
+                                <th>aname</th>
+                                <th>city</th>
+                                <th>percent</th>
+                            </tr>
+                                <?php
+                                    while ($row = $results->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>{$row['aid']}</td>";
+                                        echo "<td>{$row['aname']}</td>";
+                                        echo "<td>{$row['city']}</td>";
+                                        echo "<td>{$row['percent']}</td>";
+                                        echo "</tr>";
+                                    };
+                                ?>
+                        </table>
+                    </div>
+                    <div class="row my-3">
+                        <a href="index.php" type="button" class="btn btn-primary">Seach Again</a>
+                    </div>
                 </div>
             </div>
         </div>
