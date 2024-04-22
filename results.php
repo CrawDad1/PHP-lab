@@ -6,6 +6,9 @@ if (isset($_GET)){
     $_SESSION['formData'] = $_GET;
 }
 
+$pName = (isset($_GET['pName'])) ? ($_GET['pName']) : ('');
+$wCity = (isset($_GET['wCity'])) ? ($_GET['wCity']) : ('');
+
 // set up sql connection
 $wsuID = "f689u267";
 $mysqli = new mysqli("localhost", $wsuID, $wsuID, $wsuID);
@@ -48,13 +51,15 @@ $results = $mysqli->query($query);
     </head>
     <body class="d-flex align-items-center justify-content-center" style="background-color: #0f0f0f; color:aliceblue">
         <div style="width:50%;">
-            <h1 class="text-center">PHP PROJECT PAGE</h1>
+            <h1 class="text-center">Crawford's Project Products</h1>
             <h2 class="text-center">Results Page</h2>
-            <?php
+            <!-- print query for testing
+                <?php
                 echo "<h2 class='text-center'>{$query}</h2>";
-            ?>
+            ?> -->
             <div>
                 <div class="container card" style="background-color: #303030;color: aliceblue;">
+                    <!-- print GET for testing
                     <div class="row my-3">
                         <h3>GET contains: </h3>
                         <?php
@@ -68,8 +73,9 @@ $results = $mysqli->query($query);
                                 echo "<p>No query variables found.</p>";
                             }
                         ?>
-                    </div>
-                    <div class="row my-3">
+                    </div> -->
+                    <div class="row my-3 justify-content-center">
+                        <div style="width:80%;">
                         <table class="table" style="color: white;">
                             <tr>
                                 <th>ID</th>
@@ -100,8 +106,9 @@ $results = $mysqli->query($query);
                                 ?>
                         </table>
                     </div>
-                    <div class="row my-3">
+                    <div class="row my-3" style="width:80%;">
                         <a href="index.php" type="button" class="btn btn-primary">Seach Again</a>
+                    </div>
                     </div>
                 </div>
             </div>

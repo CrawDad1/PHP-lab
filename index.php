@@ -41,7 +41,7 @@ if (isset($_SESSION['formData'])) {
 
     <body class="d-flex align-items-center justify-content-center" style="background-color: #0f0f0f; color:aliceblue; height:100%;">
         <div style="width:50%;">
-            <h1 class="text-center">PHP PROJECT PAGE</h1>
+            <h1 class="text-center">Crawford's Project Products</h1>
             <h2 class="text-center">Product Search</h2>
             <div>
                 <form method="GET" action="results.php">
